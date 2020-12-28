@@ -78,3 +78,5 @@ function addPagination(studentsList) {
 
 
 // Call functions
+displayNineStudents(data, 1);
+addPagination(data);
