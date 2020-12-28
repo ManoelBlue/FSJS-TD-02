@@ -3,6 +3,9 @@ Treehouse Techdegree:
 FSJS Project 2 - Data Pagination and Filtering
 */
 
+
+const studentsUL = document.querySelector('.student-list');
+
 /**
  * @function
  * @name showPage
@@ -13,7 +16,6 @@ FSJS Project 2 - Data Pagination and Filtering
 function showPage(studentsList, pageNum) {
     let startIndex = (pageNum * 9) - 9;
     let endIndex = pageNum * 9;
-    const studentsUL = document.querySelector('.student-list');
 
     studentsUL.innerHTML = '';
     for (let i = 0; i < studentsList.length; i++) {
@@ -81,14 +83,47 @@ function addPagination(studentsList) {
  * @function addSearchBar
  */
 function addSearchBar() {
-    const page = document.querySelector('.page');
-    page.innerHTML += `
+    studentsUL.insertAdjacentHTML('beforebegin', `
         <label for="search" class="student-search">
             <input id="search" placeholder="Search by name...">
             <button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
         </label>
-    `;
+    `);
+    document.querySelector('.student-search').style.marginBottom = '2em';
 };
+
+addSearchBar();
+
+/**
+ * @function filterStudents
+ */
+function filterStudents(studentsList) {
+    let userInput = document.getElementById('search').value.toLowerCase();
+    let filteredStudents = [];
+    console.log(userInput);
+
+    for (let i = 0; i < studentsList.length; i++) {
+        let studentName = `${studentsList[i].name.first} ${studentsList[i].name.last}`.toLowerCase();
+        console.log(studentName);
+        if (studentName.includes(userInput)) {
+            filteredStudents.push(studentsList[i]);
+        };
+        console.log(filteredStudents);
+    };
+
+    if (filteredStudents.length === 0) {
+        studentsUL.innerHTML = '<p>No results found!</p>'
+    } else {
+        showPage(filteredStudents, 1);
+        addPagination(filteredStudents);
+    }
+};
+
+// Search Bar Listener:
+document.querySelector('.student-search').addEventListener('keyup', () => {
+    console.log('KEYUP!!!');
+    filterStudents(data);
+});
 
 // Default behavior:
 // Shows the first page displaying the first 9 students
