@@ -86,7 +86,7 @@ function addSearchBar() {
     studentsUL.insertAdjacentHTML('beforebegin', `
         <label for="search" class="student-search">
             <input id="search" placeholder="Search by name...">
-            <button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
+            <button id="search-button" type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
         </label>
     `);
     document.querySelector('.student-search').style.marginBottom = '2em';
@@ -100,15 +100,12 @@ addSearchBar();
 function filterStudents(studentsList) {
     let userInput = document.getElementById('search').value.toLowerCase();
     let filteredStudents = [];
-    console.log(userInput);
 
     for (let i = 0; i < studentsList.length; i++) {
         let studentName = `${studentsList[i].name.first} ${studentsList[i].name.last}`.toLowerCase();
-        console.log(studentName);
         if (studentName.includes(userInput)) {
             filteredStudents.push(studentsList[i]);
         };
-        console.log(filteredStudents);
     };
 
     if (filteredStudents.length === 0) {
@@ -122,6 +119,10 @@ function filterStudents(studentsList) {
 // Search Bar Listener:
 document.querySelector('.student-search').addEventListener('keyup', () => {
     console.log('KEYUP!!!');
+    filterStudents(data);
+});
+document.getElementById('search-button').addEventListener('click', () => {
+    console.log('BUTTON CLICKED!!!');
     filterStudents(data);
 });
 
