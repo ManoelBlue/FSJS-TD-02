@@ -3,20 +3,13 @@ Treehouse Techdegree:
 FSJS Project 2 - Data Pagination and Filtering
 */
 
-
-
-/*
-For assistance:
-   Check out the "Project Resources" section of the Instructions tab: https://teamtreehouse.com/projects/data-pagination-and-filtering#instructions
-   Reach out in your Slack community: https://treehouse-fsjs-102.slack.com/app_redirect?channel=unit-2
-*/
-
-
-
-/*
-Create the `showPage` function
-This function will create and insert/append the elements needed to display a "page" of nine students
-*/
+/**
+ * @function
+ * @name showPage
+ * @param {Array.<Object>} studentsList - array of Objects with students data.
+ * @param {number} pageNum - number representing the page to be displayed.
+ * @description Displays 9 students in the page.
+ */
 function showPage(studentsList, pageNum) {
     let startIndex = (pageNum * 9) - 9;
     let endIndex = pageNum * 9;
@@ -41,15 +34,17 @@ function showPage(studentsList, pageNum) {
     };
 };
 
-
-/*
-Create the `addPagination` function
-This function will create and insert/append the elements needed for the pagination buttons
-*/
+/**
+ * @function
+ * @name addPagination
+ * @param {Array.<Object>} studentsList - array of Objects with students data.
+ * @description Creates the pagination buttons and updates the displayed students based on the selected page number.
+ */
 function addPagination(studentsList) {
     let numOfPages = Math.ceil(studentsList.length / 9);
     const paginationUL = document.querySelector('.link-list');
 
+    // Creates the pagination buttons:
     paginationUL.innerHTML = '';
     for ( let i = 0; i < numOfPages; i++ ) {
         let pageBtn = `
@@ -59,7 +54,13 @@ function addPagination(studentsList) {
         `;
         paginationUL.insertAdjacentHTML('beforeend', pageBtn);
     }
+
+    // Adds the active class to the first button by default:
     document.querySelectorAll('button')[0].classList.add('active');
+
+    // Detects a click on pagination and then:
+    // Adds the active class to the clicked pagination button
+    // Calls the showPage function for the chosen page number
     paginationUL.addEventListener('click', (event) => {
         const buttons = document.querySelectorAll('button');
 
@@ -76,7 +77,7 @@ function addPagination(studentsList) {
     });
 }
 
-
-// Call functions
+// Default behavior:
+// Shows the first page displaying the first 9 students
 showPage(data, 1);
 addPagination(data);
