@@ -1,2 +1,3 @@
-# FSJS-TD-02
- 
+# Full Stack Techdegree Project 02
+
+Data Pagination and Filtering
