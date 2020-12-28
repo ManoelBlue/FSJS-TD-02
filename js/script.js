@@ -17,7 +17,7 @@ For assistance:
 Create the `showPage` function
 This function will create and insert/append the elements needed to display a "page" of nine students
 */
-function displayNineStudents(studentsList, pageNum) {
+function showPage(studentsList, pageNum) {
     let startIndex = (pageNum * 9) - 9;
     let endIndex = pageNum * 9;
     const studentsUL = document.querySelector('.student-list');
@@ -25,15 +25,15 @@ function displayNineStudents(studentsList, pageNum) {
     studentsUL.innerHTML = '';
     for (let i = 0; i < studentsList.length; i++) {
         if ( i >= startIndex && i < endIndex ) {
-            studentsUL.textContent += `
+            studentsUL.innerHTML += `
                 <li class="student-item cf">
                     <div class="student-details">
-                    <img class="avatar" src="https://randomuser.me/api/portraits/women/25.jpg" alt="Profile Picture">
-                    <h3>Ethel Dean</h3>
-                    <span class="email">ethel.dean@example.com</span>
+                        <img class="avatar" src="${studentsList[i].picture.medium}" alt="Profile Picture">
+                        <h3>${studentsList[i].name.first} ${studentsList[i].name.last}</h3>
+                        <span class="email">${studentsList[i].email}</span>
                     </div>
                     <div class="joined-details">
-                    <span class="date">Joined 12-15-2005</span>
+                        <span class="date">Joined ${studentsList[i].registered.date}</span>
                     </div>
                 </li>
             `
@@ -54,14 +54,14 @@ function addPagination(studentsList) {
     for ( let i = 0; i < numOfPages; i++ ) {
         let pageBtn = `
             <li>
-                <button type="button">${i}</button>
+                <button type="button">${i + 1}</button>
             </li>
         `;
         paginationUL.insertAdjacentHTML('beforeend', pageBtn);
     }
-    document.querySelectorAll('.button')[0].classList.add('active');
+    document.querySelectorAll('button')[0].classList.add('active');
     paginationUL.addEventListener('click', (event) => {
-        const buttons = document.querySelectorAll('.button');
+        const buttons = document.querySelectorAll('button');
 
         if (event.target.tagName === 'BUTTON') {
             let clickedPage = event.target.textContent;
@@ -70,13 +70,13 @@ function addPagination(studentsList) {
                 buttons[i].classList.remove('active');
             }
 
-            buttons[i].classList.add('active');
-            displayNineStudents(studentsList, clickedPage);
+            buttons[clickedPage - 1].classList.add('active');
+            showPage(studentsList, clickedPage);
         }
     });
 }
 
 
 // Call functions
-displayNineStudents(data, 1);
+showPage(data, 1);
 addPagination(data);
