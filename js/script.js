@@ -77,6 +77,19 @@ function addPagination(studentsList) {
     });
 }
 
+/**
+ * @function addSearchBar
+ */
+function addSearchBar() {
+    const page = document.querySelector('.page');
+    page.innerHTML += `
+        <label for="search" class="student-search">
+            <input id="search" placeholder="Search by name...">
+            <button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
+        </label>
+    `;
+};
+
 // Default behavior:
 // Shows the first page displaying the first 9 students
 showPage(data, 1);
