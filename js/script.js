@@ -46,7 +46,35 @@ function displayNineStudents(studentsList, pageNum) {
 Create the `addPagination` function
 This function will create and insert/append the elements needed for the pagination buttons
 */
+function addPagination(studentsList) {
+    let numOfPages = Math.ceil(studentsList.length / 9);
+    const paginationUL = document.querySelector('.link-list');
 
+    paginationUL.innerHTML = '';
+    for ( let i = 0; i < numOfPages; i++ ) {
+        let pageBtn = `
+            <li>
+                <button type="button">${i}</button>
+            </li>
+        `;
+        paginationUL.insertAdjacentHTML('beforeend', pageBtn);
+    }
+    document.querySelectorAll('.button')[0].classList.add('active');
+    paginationUL.addEventListener('click', (event) => {
+        const buttons = document.querySelectorAll('.button');
+
+        if (event.target.tagName === 'BUTTON') {
+            let clickedPage = event.target.textContent;
+
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove('active');
+            }
+
+            buttons[i].classList.add('active');
+            displayNineStudents(studentsList, clickedPage);
+        }
+    });
+}
 
 
 // Call functions
