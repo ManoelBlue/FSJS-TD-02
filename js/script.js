@@ -58,13 +58,13 @@ function addPagination(studentsList) {
     }
 
     // Adds the active class to the first button by default:
-    document.querySelectorAll('button')[0].classList.add('active');
+    document.querySelectorAll('.link-list button')[0].classList.add('active');
 
     // Detects a click on pagination and then:
     // Adds the active class to the clicked pagination button
     // Calls the showPage function for the chosen page number
     paginationUL.addEventListener('click', (event) => {
-        const buttons = document.querySelectorAll('button');
+        const buttons = document.querySelectorAll('.link-list button');
 
         if (event.target.tagName === 'BUTTON') {
             let clickedPage = event.target.textContent;
@@ -81,6 +81,7 @@ function addPagination(studentsList) {
 
 /**
  * @function addSearchBar
+ * @description Adds a search bar input on the markup.
  */
 function addSearchBar() {
     studentsUL.insertAdjacentHTML('beforebegin', `
@@ -96,6 +97,8 @@ addSearchBar();
 
 /**
  * @function filterStudents
+ * @param {Array.<Object>} studentsList - array of Objects with students data.
+ * @description Filters the student list based on the search input.
  */
 function filterStudents(studentsList) {
     let userInput = document.getElementById('search').value.toLowerCase();
@@ -116,13 +119,11 @@ function filterStudents(studentsList) {
     }
 };
 
-// Search Bar Listener:
+// Search Bar Listeners:
 document.querySelector('.student-search').addEventListener('keyup', () => {
-    console.log('KEYUP!!!');
     filterStudents(data);
 });
 document.getElementById('search-button').addEventListener('click', () => {
-    console.log('BUTTON CLICKED!!!');
     filterStudents(data);
 });
 
