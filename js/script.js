@@ -5,6 +5,7 @@ FSJS Project 2 - Data Pagination and Filtering
 
 
 const studentsUL = document.querySelector('.student-list');
+const paginationUL = document.querySelector('.link-list');
 
 /**
  * @function
@@ -44,7 +45,6 @@ function showPage(studentsList, pageNum) {
  */
 function addPagination(studentsList) {
     let numOfPages = Math.ceil(studentsList.length / 9);
-    const paginationUL = document.querySelector('.link-list');
 
     // Creates the pagination buttons:
     paginationUL.innerHTML = '';
@@ -112,7 +112,8 @@ function filterStudents(studentsList) {
     };
 
     if (filteredStudents.length === 0) {
-        studentsUL.innerHTML = '<p>No results found!</p>'
+        studentsUL.innerHTML = '<p>No results found!</p>';
+        paginationUL.innerHTML = '';
     } else {
         showPage(filteredStudents, 1);
         addPagination(filteredStudents);
