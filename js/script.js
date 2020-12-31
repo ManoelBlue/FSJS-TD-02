@@ -3,7 +3,7 @@ Treehouse Techdegree:
 FSJS Project 2 - Data Pagination and Filtering
 */
 
-
+// Global variables:
 const studentsUL = document.querySelector('.student-list');
 const paginationUL = document.querySelector('.link-list');
 
